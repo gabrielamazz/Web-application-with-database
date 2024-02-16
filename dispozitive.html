@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<meta charset="UTF-8">
+		<title>Dispozitive</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">					 
+	</head>
+	<body></br></br></br></br></br>
+		<div class="navbar">
+            <a href="{{ url_for('gestiune') }}">Gestiune</a>
+			<a href="{{ url_for('dispozitive') }}">Dispozitive</a>
+			<a href="{{ url_for('servicii') }}">Servicii</a>
+			<a href="{{ url_for('clienti') }}">Clienți</a>
+			<a href="{{ url_for('angajati') }}">Angajați</a>
+			<a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+		</div>
+
+        <div class="page-title">
+            <h1>Dispozitive</h1>
+            <form action="{{ url_for('dispozitive') }}" method="get" class="search-bar">
+                <input type="text" name="cautare_categorie" placeholder="Caută categorie..." class="search-input">
+                <button type="submit" class="search-button" >Caută</button>
+            </form>
+        </div>
+
+
+            <!-- Formular pentru adăugarea unui nou dispozitiv -->
+            <div class="dispozitiv-box">
+            <form action="{{ url_for('dispozitive') }}" method="post">
+                <!-- Câmpuri pentru denumire, categorie, client, model, specificații -->
+                <input type="text" name="denumire" placeholder="Denumire" >
+                <br>
+            </br>
+                <select name="categorie_id">
+                    {% for categorie in categorii %}
+                        <option value="{{ categorie.CategorieID }}" >{{ categorie.Denumire }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+            </br>
+                
+                <select name="client_id">
+                    {% for client in clienti %}
+                        <option value="{{ client.ClientID }}" >{{ client.Nume }} {{ client.Prenume }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+            </br>
+                
+                <input type="text" name="model" placeholder="Model" >
+                <br>
+            </br>
+                <input type="text" name="specificatii" placeholder="Specificatii" >
+                <br>
+            </br>
+                <!-- Adăugați câmpuri pentru categorie_id, client_id, model, specificatii -->
+                <input type="submit" class="login-button" value="Adaugă Dispozitiv">
+            </form>
+            
+            </div>
+            {% if show_top %}
+            <div>
+                <h2>Clienți cu cele mai multe servicii</h2>
+                <table>
+                    <tr>
+                        <th>Client ID</th>
+                        <th>Nume</th>
+                        <th>Prenume</th>
+                        <th>Număr Servicii</th>
+                    </tr>
+                    {% for client in clienti_top %}
+                    <tr>
+                        <td>{{ client.ClientID }}</td>
+                        <td>{{ client.Nume }}</td>
+                        <td>{{ client.Prenume }}</td>
+                        <td>{{ client.NumarServicii }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+        
+        
+           
+            <div class="dispozitive-container">
+                {% for dispozitiv in dispozitive %}
+                    <div class="dispozitiv-box">
+                        <p><strong>Denumire:</strong> {{ dispozitiv.DenumireDispozitiv }}</p>
+                        <p><strong>Categorie:</strong> {{ dispozitiv.DenumireCategorie }}</p>
+                        <p><strong>Client:</strong> {{ dispozitiv.NumeClient }} {{ dispozitiv.PrenumeClient }}</p>
+                        <p><strong>Model:</strong> {{ dispozitiv.Model }}</p>
+                        <p><strong>Specificatii:</strong> {{ dispozitiv.Specificatii }}</p>
+                        
+                        <!-- Formular pentru ștergere -->
+                        <form action="{{ url_for('dispozitive') }}" method="post">
+                            <input type="hidden" name="dispozitiv_id_stergere" value="{{ dispozitiv.DispozitivID }}">
+                            <input type="submit" value="Șterge">
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+           
+        
+</body>
+</html>
+

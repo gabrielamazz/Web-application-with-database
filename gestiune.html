@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<meta charset="UTF-8">
+		<title>Gestiune</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">					 
+	</head>
+	<body></br></br></br></br></br>
+		<div class="navbar">
+            <a href="{{ url_for('gestiune') }}">Gestiune</a>
+			<a href="{{ url_for('dispozitive') }}">Dispozitive</a>
+			<a href="{{ url_for('servicii') }}">Servicii</a>
+			<a href="{{ url_for('clienti') }}">Clienți</a>
+			<a href="{{ url_for('angajati') }}">Angajați</a>
+			<a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+		</div>
+
+        <div class="page-title">
+            <h1>Gestiunea serviciilor oferite</h1>
+			<form action="{{ url_for('gestiune') }}" method="get" class="search-bar">
+				<input type="text" name="oras_cautat" placeholder="Caută oraș..."  class="search-input">
+				<button type="submit" class="search-button">Caută</button>
+			</form>
+        </div>
+
+		<div class="forms-container">
+
+		<div class="dispozitiv-box">
+			<form action="{{ url_for('gestiune') }}" method="post">
+				
+				<label for="serviciu_id">Serviciu:</label>
+                <select name="serviciu_id">
+                    {% for serviciu in servicii %}
+                        <option value="{{ serviciu.ServiciuID }}" >{{ serviciu.Denumire }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+            </br>
+
+			<label for="dispozitiv_id">Dispozitiv:</label>
+			<select name="dispozitiv_id">
+				{% for dispozitiv in dispozitive %}
+					<option value="{{ dispozitiv.DispozitivID }}" >{{ dispozitiv.Denumire }} {{ dispozitiv.Model }} - {{ dispozitiv.NumeClient }}</option>
+				{% endfor %}
+			</select>
+			<br>
+		</br>
+
+		<label for="angajat_id">Responsabil:</label>
+		<select name="angajat_id">
+			{% for angajat in angajati %}
+				<option value="{{ angajat.AngajatID }}" >{{ angajat.Nume }} {{ angajat.Prenume }}</option>
+			{% endfor %}
+		</select>
+		<br>
+	</br>
+			<input type="text" name="data_finalizare" placeholder="Data Finalizare" >
+			<br>
+		</br>
+
+			<input type="text" name="pret" placeholder="Pret" >
+			<br>
+		</br>
+			
+
+
+				<input type="submit" class="login-button" value="Adaugă Inregistrare">
+			</form>
+		</div>
+
+		
+		<div class="top-clients-button">
+			<form action="{{ url_for('gestiune') }}" method="get">
+				<button type="submit" class="login-button" name="show_least_service_category" value="true">Afișează categoria de dispozitive cu cele mai puține servicii efectuate</button>
+			</form>
+			<br>
+		</br>
+		<br>
+	</br>
+	{% if show_least_service_category and least_service_category %}
+    <div class="dispozitiv-container">
+        <h2>Categoria cu cele mai puține servicii</h2>
+        <div class="dispozitiv-box">
+            <p><strong>Denumire Categorie:</strong> {{ least_service_category.Denumire }}</p>
+            <p><strong>Număr Servicii:</strong> {{ least_service_category.NumarServicii }}</p>
+        </div>
+    </div>
+{% endif %}
+
+<div class="top-services-button">
+    <form action="{{ url_for('gestiune') }}" method="get">
+        <button type="submit" class="login-button" name="show_frequent_services" value="true">Afișează Servicii Frecvente</button>
+    </form>
+</div>
+
+{% if show_frequent_services and frequent_services %}
+    <div class="dispozitiv-container">
+        <h2>Servicii Frecvente pentru Categorii Specifice de Dispozitive</h2>
+        {% for service in frequent_services %}
+            <div class="dispozitiv-box">
+                <p><strong>Serviciu:</strong> {{ service.NumeServiciu }}</p>
+                <p><strong>Categorie:</strong> {{ service.NumeCategorie }}</p>
+                <p><strong>Număr Servicii:</strong> {{ service.NumarServicii }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if not show_least_service_category and not show_frequent_services %}
+    <div class="dispozitive-container">
+        {% for gestiune in gestiuni %}
+            <div class="dispozitiv-box">
+                <p><strong>Serviciu:</strong> {{ gestiune.NumeServiciu }}</p>
+                <p><strong>Dispozitiv:</strong> {{ gestiune.NumeDispozitiv }} </p>
+                <p><strong>Model:</strong> {{ gestiune.Model }}</p>
+                <p><strong>Client:</strong> {{ gestiune.NumeClient }}</p>
+                <p><strong>Responsabil:</strong> {{ gestiune.NumeAngajat }}</p>
+                <p><strong>Data finalizare:</strong> {{ gestiune.Data_finalizare }}</p>
+                <p><strong>Pret:</strong> {{ gestiune.Pret }}</p>
+                <form action="{{ url_for('actualizeaza_gestiune') }}" method="post">
+                    <input type="hidden" name="gestiune_id" value="{{ gestiune.GestiuneID }}">
+                    <input type="date" name="data_finalizare_noua">
+                    <input type="submit" value="Actualizează Data">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+        </body>
+        </html>

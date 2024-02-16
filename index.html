@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .centered-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .centered-container a {
+            margin: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body></br></br></br></br></br>
+    <div class="navbar">
+        <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+    </div>
+
+	<div class="navbar">
+		<a href="{{ url_for('gestiune') }}">Gestiune</a>
+		<a href="{{ url_for('dispozitive') }}">Dispozitive</a>
+		<a href="{{ url_for('servicii') }}">Servicii</a>
+		<a href="{{ url_for('clienti') }}">Clienți</a>
+		<a href="{{ url_for('angajati') }}">Angajați</a>
+		<a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+	</div>
+
+    <div class="welcome-message">
+        <h1>Bun venit! <br>
+		</br>
+        Aceasta este pagina ta de start unde poți accesa rapid diferite secțiuni ale aplicației.</h1>
+    </div>
+
+    <div class="centered-container">
+        <a href="{{ url_for('gestiune') }}" class="login-button">Gestionarea serviciilor</a>
+        <a href="{{ url_for('dispozitive') }}" class="login-button">Dispozitive</a>
+        <a href="{{ url_for('servicii') }}" class="login-button">Serviciile standard</a>
+        <a href="{{ url_for('clienti') }}" class="login-button">Clienții nostrii</a>
+        <a href="{{ url_for('angajati') }}" class="login-button">Angajații firmei</a>
+    </div>
+</body>
+</html>

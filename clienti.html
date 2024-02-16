@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<meta charset="UTF-8">
+		<title>Clienti</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">					 
+	</head>
+	<body></br></br></br></br></br>
+		<div class="navbar">
+            <a href="{{ url_for('gestiune') }}">Gestiune</a>
+			<a href="{{ url_for('dispozitive') }}">Dispozitive</a>
+			<a href="{{ url_for('servicii') }}">Servicii</a>
+			<a href="{{ url_for('clienti') }}">Clienți</a>
+			<a href="{{ url_for('angajati') }}">Angajați</a>
+			<a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+		</div>
+
+        <div class="page-title">
+            <h1>Clienti</h1>
+        </div>
+
+     
+<div class="forms-container">
+        <div class="dispozitiv-box">
+            <form action="{{ url_for('clienti') }}" method="post">
+                <input type="text" name="nume" placeholder="Nume" >
+                <br>
+            </br>
+                
+                <input type="text" name="prenume" placeholder="Prenume" >
+                <br>
+            </br>
+                <input type="text" name="telefon" placeholder="Telefon" >
+                <br>
+            </br>
+                <input type="text" name="email" placeholder="E-mail" >
+            <br>
+        </br>
+                <input type="text" name="oras" placeholder="Oras" >
+                <br>
+             </br>
+                <input type="submit" class="login-button" value="Adaugă Client">
+            </form>
+            
+            </div>
+
+            <br>
+        </br>
+            <div class="top-clients-button"  >
+                <form action="{{ url_for('clienti') }}" method="get">
+                    <button type="submit" class="login-button" name="show_top" value="true">Afișează cel mai fidel client al firmei</button>
+                </form>
+                <br>
+            </br>
+            <div class="top-clients-button">
+                <form action="{{ url_for('clienti') }}" method="get">
+                    <button type="submit" class="login-button" name="show_pending_devices" value="true">Afișează clienții ce așteaptă dispozitive</button>
+                </form>
+            </div>
+        
+            <br>
+        </br>
+
+        {% if show_top and top_client %}
+        <div class="dispozitiv-container">
+            <h2>Top Client al Firmei</h2>
+            <div class="dispozitiv-box">
+                <p><strong>Nume:</strong> {{ top_client.Nume }}</p>
+                <p><strong>Prenume:</strong> {{ top_client.Prenume }}</p>
+                <p><strong>Număr Servicii:</strong> {{ top_client.NumarServicii }}</p>
+            </div>
+
+              
+            {% elif show_pending_devices and pending_clients %}
+
+            <div class="dispozitiv-container">
+        <h2>Clienți ce așteaptă Dispozitive</h2>
+        {% for client in pending_clients %}
+            <div class="dispozitiv-box">
+                <p><strong>Nume:</strong> {{ client.Nume }}</p>
+                <p><strong>Prenume:</strong> {{ client.Prenume }}</p>
+                <p><strong>Dispozitiv:</strong> {{ client.DenumireDispozitiv }}</p>
+                
+            </div>
+            {% endfor %}
+            </div>
+        
+    {%else %}
+
+        <div class="dispozitiv-container">
+                {% for client in clienti %}
+                    <div class="dispozitiv-box">
+                        <p><strong>Nume:</strong> {{ client.Nume }}</p>
+                        <p><strong>Prenume:</strong> {{ client.Prenume }}</p>
+                        <p><strong>Telefon:</strong> {{ client.Nr_telefon }}</p>
+                        <p><strong>E-mail:</strong> {{ client.Email }}</p>
+                        <p><strong>Oras:</strong> {{ client.Oras }}</p>
+                        
+                        <!-- Formular pentru ștergere -->
+                        <form action="{{ url_for('clienti') }}" method="post">
+                            <input type="hidden" name="client_id_stergere" value="{{ client.ClientID }}">
+                            <input type="submit" value="Șterge">
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+</div>     
+            
+        
+
+           
+        
+        </body>
+        </html>

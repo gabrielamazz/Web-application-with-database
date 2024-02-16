@@ -1,0 +1,223 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dispozitive-container, .dispozitiv-box, .page-title {
+    margin: auto;    
+    max-width: 1200px; /* sau orice altă lățime preferați */
+}
+
+.page-title {
+    position: relative; /* Adăugat pentru poziționarea absolută a search bar-ului */
+    background-color: #b86a7e; /* Culoarea de fundal existentă */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%; /* S-a modificat pentru a se întinde pe toată lățimea */
+}
+
+.forms-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* sau 'center' dacă dorești să aliniezi la centru vertical */
+    margin-bottom: 20px; /* Spațiu sub container dacă este necesar */
+}
+.search-bar {
+    position: absolute;
+    right: 10px; /* Spațierea de marginea din dreapta */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 140px; /* Lățimea dorită pentru input */
+    margin-right: 5px;
+}
+
+/* Folosește stilurile existente pentru butoane pentru a stiliza butonul de căutare */
+.search-button {
+    padding: 5px 10px;
+    background-color: #81112d; /* Culoarea butonului "Adaugă Dispozitiv" */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em; /* O mărime mai mică dacă este necesar */
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: #a33f5d; /* O nuanță mai deschisă la hover */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e9d8dbfb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    flex-direction:column;
+
+
+}
+
+.top-clients-button {
+    margin-top: 20px; /* Ajustează valoarea după necesități */
+}
+
+.login-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-title {
+    text-align: center;
+    color: #81112d;
+    margin-bottom: 2rem;
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #f8c0cc;
+    font-size: 1rem;
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #81112d;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-button:hover {
+    background-color:#81112d;
+}
+
+.login-message {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-register {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.login-register a {
+    color: #81112d;
+    text-decoration: none;
+}
+
+.login-register a:hover {
+    text-decoration: underline;
+}
+
+.navbar {
+    background-color: #81112d;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrarea tuturor elementelor */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.menu-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Spațiere între linkuri */
+}
+
+.navbar a {
+    color: white;
+    padding: 30px 20px; /* Ajustează padding-ul după preferințe */
+    text-decoration: none;
+    font-size: 21px;
+}
+
+.navbar a:hover {
+    background-color: #fff;
+    color: #81112d;
+}
+
+.login-link {
+    position: absolute;
+    right: 50px;
+}
+
+.navbar .login-btn {
+    background-color: #b86a7e;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.navbar .login-btn:hover {
+    background-color: #b86a7e;
+    color: #fff;
+}
+
+.content {
+    margin-top: 80px;
+}
+
+
+/* Pentru Box-uri */
+
+.dispozitive-container {
+   display: flex; 
+   flex-wrap: wrap; /* Permite box-urilor să treacă pe rândul următor */
+    justify-content: space-around; /* Spațiere între box-uri */
+    padding: 20px;
+}
+
+.dispozitiv-box {
+    background-color: #fff9f9; /* Culoare de fundal pentru box-uri */
+    border: 1px solid #ddd; /* Bordură pentru box-uri */
+    border-radius: 10px; /* Margini rotunjite */
+    padding: 20px;
+    margin: 15px; /* Spațiu în jurul fiecărui box */
+    width: 260px; /* Lățimea fiecărui box */ 
+    display: inline-block; /* Afișează elementele pe aceeași linie */
+    margin-right: 20px; /* Spațiu între elementele de serviciu */
+    vertical-align: top; /* Aliniază elementele în partea de sus a liniilor */
+}
+
+.dispozitiv-box p {
+    text-align: left; /* Aliniază textul la stânga */
+    margin: 17px 0; /* Spațiu între paragrafe */
+}
+
+input[type="text"], select {
+    width: 100%; /* Sau o lățime specifică, dacă preferați */
+    padding: 12px 20px; /* Măriți padding-ul pentru a face câmpurile mai înalte */
+    margin: 8px 0; /* Adăugați un pic de spațiu între câmpuri */
+    display: inline-block; /* Afișați elementele inline dar cu comportament de block */
+    border: 1px solid #ccc; /* O bordură subtilă */
+    border-radius: 4px; /* Margini rotunjite pentru estetică */
+    box-sizing: border-box; /* Asigurați-vă că lățimea include padding și bordură */
+}

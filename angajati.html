@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angajați</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">                 
+</head>
+<body></br></br></br></br></br>
+    <div class="navbar">
+        <a href="{{ url_for('gestiune') }}">Gestiune</a>
+        <a href="{{ url_for('dispozitive') }}">Dispozitive</a>
+        <a href="{{ url_for('servicii') }}">Servicii</a>
+        <a href="{{ url_for('clienti') }}">Clienți</a>
+        <a href="{{ url_for('angajati') }}">Angajați</a>
+        <a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+    </div>
+
+    <div class="page-title">
+        <h1>Angajați</h1>
+        <form action="{{ url_for('angajati') }}" method="get" class="search-bar">
+            <input type="text" name="cautare_departament" placeholder="Caută departament..." class="search-input">
+            <button type="submit" class="search-button">Caută</button>
+        </form>
+    </div>
+
+    <br></br>
+    <form action="{{ url_for('angajati') }}" method="get">
+        <button type="submit" class="login-button" name="show_top" value="true">Afișează Top 3 Angajați cu cele mai multe servicii efectuate</button>
+    </form>
+    </div>
+    <br></br>
+
+    {% if show_top and top_angajati %}
+    <h2>Top 3 Angajați</h2>
+    <br></br>
+    <div class="dispozitiv-container">
+        
+        {% for angajat in top_angajati %}
+            <div class="dispozitiv-box">
+                <p><strong>Nume:</strong> {{ angajat.Nume }}</p>
+                <p><strong>Prenume:</strong> {{ angajat.Prenume }}</p>
+                <p><strong>Departament:</strong> {{ angajat.Nume_departament }}</p>
+                <p><strong>Număr Servicii:</strong> {{ angajat.NumarServicii }}</p>
+                
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% else %}
+    <div class="dispozitiv-container">
+        {% for angajat in angajati %}
+            <div class="dispozitiv-box">
+                <p><strong>Nume:</strong> {{ angajat.Nume }}</p>
+                <p><strong>Prenume:</strong> {{ angajat.Prenume }}</p>
+                <p><strong>Departament:</strong> {{ angajat.Nume_departament }}</p>
+               <p><strong>Telefon:</strong> {{ angajat.Nr_telefon }}</p>
+                <p><strong>Email:</strong> {{ angajat.Email }}</p>
+                <p><strong>CNP:</strong> {{ angajat.CNP }}</p>
+                <p><strong>Data nasterii:</strong> {{ angajat.Data_nasterii }}</p>
+                <p><strong>Oras:</strong> {{ angajat.Oras }}</p> 
+                
+
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>

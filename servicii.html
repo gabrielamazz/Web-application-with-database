@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<meta charset="UTF-8">
+		<title>Servicii</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">					 
+	</head>
+	<body></br></br></br></br></br>
+		<div class="navbar">
+            <a href="{{ url_for('gestiune') }}">Gestiune</a>
+			<a href="{{ url_for('dispozitive') }}">Dispozitive</a>
+			<a href="{{ url_for('servicii') }}">Servicii</a>
+			<a href="{{ url_for('clienti') }}">Clienți</a>
+			<a href="{{ url_for('angajati') }}">Angajați</a>
+			<a href="{{ url_for('login') }}" class="login-btn">Logout</a>
+		</div>
+
+        <div class="page-title">
+            <h1>Servicii</h1>
+        </div>
+
+        <div class="dispozitiv-container">
+            {% for serviciu in servicii %}
+                <div class="dispozitiv-box">
+                    <p><strong>Denumire:</strong> {{ serviciu.Denumire }}</p>
+                    <p><strong>Pret:</strong> {% if serviciu.Pret %}{{ serviciu.Pret }}{% else %}-{% endif %}</p>
+                    <p><strong>Piesa necesara:</strong> {% if serviciu.Piesa_necesara %}{{ serviciu.Piesa_necesara }}{% else %}-{% endif %}</p>
+                    <form action="{{ url_for('actualizeaza_pret_serviciu') }}" method="post">
+                        <input type="hidden" name="serviciu_id" value="{{ serviciu.ServiciuID }}">
+                        <input type="number" name="pret_nou" placeholder="Noul Preț" min="0">
+                        <input type="submit" value="Actualizează Prețul">
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+
+
+        </body>
+        </html>
